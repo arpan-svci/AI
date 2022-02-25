@@ -98,8 +98,31 @@ bool bfs(vector<vector<int>>&adj,vector<int>&node,int val){
     return false; 
 }
 
-bool dls(vector<vector<int>>&adj,vector<int>&node,int val){
-
+bool dls(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
+    stack<pair<int,int>>st;
+    vector<bool>visited(adj.size(),false);
+    int depth=0;
+    st.push({0,0});
+    visited[0]=true;
+    // cout<<'0'<<endl;
+    while(!st.empty()){
+        cout<<st.top().first<<st.top().second<<endl;
+        if(node[st.top().first]==val)
+            return true;
+        else{
+            pair<int,int> temp=st.top();
+            st.pop();
+            for(int i=adj.size()-1;i>=0;i--){
+                if(adj[temp.first][i]==1 && !visited[i]){
+                    st.push({i,temp.second+1});
+                    visited[i]=true;
+                    // cout<<i;
+                }
+            }
+            // cout<<endl;
+        }
+    }
+    return false; 
 }
 int main(){
     // pair<vector<vector<int>>,vector<int>> graph=create_unweighted_undirected_graph();
