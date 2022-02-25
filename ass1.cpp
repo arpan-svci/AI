@@ -100,10 +100,10 @@ bool bfs(vector<vector<int>>&adj,vector<int>&node,int val){
 int main(){
     // pair<vector<vector<int>>,vector<int>> graph=create_unweighted_undirected_graph();
 
-    vector<vector<int>>temp={{0,1,1,0,1},{1,0,0,1,0},{1,0,0,1,0},{0,1,1,0,0},{1,0,0,1,0}};
+    vector<vector<int>>temp={{0,1,1,1,0},{1,0,0,0,0},{1,0,0,0,1},{1,0,0,0,0},{0,0,1,0,0}};
     vector<int>l={2,3,5,6,8};
 
-    if(dfs(temp,l,6))
+    if(bfs(temp,l,8))
         cout<<"found"<<endl;
     else
         cout<<"not found"<<endl;
