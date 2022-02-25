@@ -101,11 +101,12 @@ bool bfs(vector<vector<int>>&adj,vector<int>&node,int val){
 bool dls(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
     stack<pair<int,int>>st;
     vector<bool>visited(adj.size(),false);
-    int depth=0;
     st.push({0,0});
     visited[0]=true;
     // cout<<'0'<<endl;
     while(!st.empty()){
+        if(st.top().second>depth_limit)
+            break;
         cout<<st.top().first<<st.top().second<<endl;
         if(node[st.top().first]==val)
             return true;
@@ -130,7 +131,12 @@ int main(){
     vector<vector<int>>temp={{0,1,1,1,0},{1,0,0,0,0},{1,0,0,0,1},{1,0,0,0,0},{0,0,1,0,0}};
     vector<int>l={2,3,5,6,8};
 
-    if(bfs(temp,l,8))
+    if(dfs(temp,l,8))
+        cout<<"found"<<endl;
+    else
+        cout<<"not found"<<endl;
+
+    if(dls(temp,l,8,2))
         cout<<"found"<<endl;
     else
         cout<<"not found"<<endl;
