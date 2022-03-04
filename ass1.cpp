@@ -104,7 +104,7 @@ bool dls(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
     st.push({0,0});
     visited[0]=true;
     // cout<<'0'<<endl;
-    while(!st.empty()){
+    while(!st.empty()&& depth_limit){
         if(st.top().second>depth_limit)
             break;
         cout<<st.top().first<<st.top().second<<endl;
@@ -126,20 +126,28 @@ bool dls(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
     return false; 
 }
 
+bool ids(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
+    for(int i=0;i<depth_limit;i++){
+        if(dls(adj,node,val,i))
+            return true;
+        cout<<endl<<"iteration no:"<<i<<endl;
+    }
+    return false;
+}
 int main(){
     // pair<vector<vector<int>>,vector<int>> graph=create_unweighted_undirected_graph();
 
     vector<vector<int>>temp={{0,1,1,1,0},{1,0,0,0,0},{1,0,0,0,1},{1,0,0,0,0},{0,0,1,0,0}};
     vector<int>l={2,3,5,6,8};
 
-    if(dfs(temp,l,8))
+    if(ids(temp,l,8,3))
         cout<<"found"<<endl;
     else
         cout<<"not found"<<endl;
 
-    if(dls(temp,l,8,2))
-        cout<<"found"<<endl;
-    else
-        cout<<"not found"<<endl;
-    return 0;
+    // if(dls(temp,l,8,2))
+    //     cout<<"found"<<endl;
+    // else
+    //     cout<<"not found"<<endl;
+    // return 0;
 }
