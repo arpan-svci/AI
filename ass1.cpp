@@ -128,9 +128,46 @@ bool dls(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
 
 bool ids(vector<vector<int>>&adj,vector<int>&node,int val,int depth_limit){
     for(int i=0;i<depth_limit;i++){
+        cout<<endl<<"iteration no:"<<i<<endl;
         if(dls(adj,node,val,i))
             return true;
-        cout<<endl<<"iteration no:"<<i<<endl;
+    }
+    return false;
+}
+
+bool bfs_mod(vector<vector<int>>&adj,vector<int>&node,int val,int breadth_limit){
+    queue<int>st;
+    vector<bool>visited(adj.size(),false);
+    st.push(0);
+    visited[0]=true;
+    // cout<<'0'<<endl;
+    while(!st.empty()){
+        cout<<st.front()<<endl;
+        if(node[st.front()]==val)
+            return true;
+        else{
+            int temp=st.front();
+            st.pop();
+            int foo=0;
+            for(int i=0;i<adj.size();i++){
+                if(adj[temp][i]==1 && !visited[i] && foo<breadth_limit){
+                    foo++;
+                    st.push(i);
+                    visited[i]=true;
+                    // cout<<i;
+                }
+            }
+            // cout<<endl;
+        }
+    }
+    return false; 
+}
+
+bool ibs(vector<vector<int>>&adj,vector<int>&node,int val,int breadth_limit){
+    for(int i=0;i<breadth_limit;i++){
+        cout<<endl<<"iteration no "<<i<<":"<<endl;
+        if(bfs_mod(adj,node,val,i))
+            return true;
     }
     return false;
 }
@@ -140,7 +177,7 @@ int main(){
     vector<vector<int>>temp={{0,1,1,1,0},{1,0,0,0,0},{1,0,0,0,1},{1,0,0,0,0},{0,0,1,0,0}};
     vector<int>l={2,3,5,6,8};
 
-    if(ids(temp,l,8,3))
+    if(ibs(temp,l,8,3))
         cout<<"found"<<endl;
     else
         cout<<"not found"<<endl;
