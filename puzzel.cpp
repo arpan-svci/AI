@@ -6,7 +6,7 @@ int main(){
 vector<vector<int>>v{{0,-1},{0,1},{1,0},{-1,0}};
 vector<vector<vector<int>>>states;
 queue<vector<vector<vector<int>>>>q;
-vector<vector<int>>initial{{1,2,3},{8,4,5},{7,6,0}};
+vector<vector<int>>initial{{1,2,3},{0,4,6},{7,5,8}};
 vector<vector<int>>goal{{1,2,3},{4,5,6},{7,8,0}};
 vector<vector<vector<int>>>temp;
 temp.push_back(initial);
@@ -37,13 +37,13 @@ while(!q.empty()){
     }
     if(!present){
         states.push_back(temp[temp.size()-1]);
-        cout<<'\n'<<count++<<"state :"<<'\n';
-        for(auto i:temp[temp.size()-1]){
-            for(auto j:i){
-                cout<<j<<'\t';
-            }
-            cout<<endl;
-        }
+        // cout<<'\n'<<count++<<"state :"<<'\n';
+        // for(auto i:temp[temp.size()-1]){
+        //     for(auto j:i){
+        //         cout<<j<<'\t';
+        //     }
+        //     cout<<endl;
+        // }
 
         vector<vector<int>>state=temp[temp.size()-1];
         vector<vector<int>>state1;
